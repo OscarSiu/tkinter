@@ -1,3 +1,3 @@
-# tkinter-sample
+##  Python tkinter GUI template
 
-## Python GUI template
+`pyinstaller.exe --onefile --icon=drone.ico app.py`
