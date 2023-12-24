@@ -8,5 +8,4 @@
 **3dplot.py** -- Plot 3d points template
 
 Create exe file
-
 `pyinstaller --onefile --icon=drone.ico app.py`
