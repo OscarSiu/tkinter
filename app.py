@@ -1,7 +1,10 @@
-import tkinter as tk
-import os
+# A python tkinter gui window for Drone Ground Sampling Distance calculation 
+# Author: Oscar Siu 
 
-# 建立主視窗和 Frame（把元件變成群組的容器）
+import tkinter as tk
+#import os
+
+# Create the main window and frame
 window = tk.Tk()
 window.title('Yinspectica v0.1')
 window.geometry('600x400')
@@ -11,20 +14,20 @@ def only_numbers(char):
  return char.replace(".", "0", 1).isdigit()
 
 def cal():
-    sample_dis = 3
+    default_dis = 3
     gsd = float(height_entry.get())
     dis = float(weight_entry.get())
   
-    new_gsd = gsd * dis /sample_dis
+    new_gsd = gsd * dis /default_dis
 
     result = 'New GSD: {:.2f}'.format(new_gsd) + ' (mm/pixel)'
     result_label.configure(text=result,font = 'Arial', fg = 'red')
 
-
+# Add elements into frame
 label = tk.Label(window, text='GSD Calculator', font =('Arial',18), anchor = 'w')
 label.pack(side=tk.TOP, pady=30)
 
-# 以下為 height_frame 群組
+# "Sample GSD" group
 height_frame = tk.Frame(window)
 height_frame.pack(side=tk.TOP)
 
@@ -35,7 +38,7 @@ validation = height_frame.register(only_numbers)
 height_entry = tk.Entry(height_frame, validate= 'key', validatecommand=(validation, '%S'))
 height_entry.pack(side=tk.RIGHT)
 
-# 以下為 weight_frame 群組
+# "Working distance" group
 weight_frame = tk.Frame(window)
 weight_frame.pack(side=tk.TOP)
 
@@ -47,28 +50,27 @@ weight_entry = tk.Entry(weight_frame, validate='key', validatecommand=(validatio
 weight_entry.pack(side=tk.RIGHT)
 
 
-#Button
+# Button
 calculate_btn = tk.Button(window, text='Calculate', font = ('Arial', 12), command=cal)
 calculate_btn.pack(pady = 5)
 
 
-#Show result
+# Show result
 result_label = tk.Label(window, font = 14)
 result_label.pack(ipady= 20)
 
 
-# 建立事件處理函式（event handler），透過元件 command 參數存取
+# event handler
 def echo_hello():
     exit()
 
 
-# 以下為 bottom 群組
+# Bottom group
 bottom_frame = tk.Frame(window)
 bottom_frame.pack(side=tk.BOTTOM)
-# bottom_button 綁定 echo_hello 事件處理，點擊該按鈕會印出 hello world :)
+# call event handler to exit the window when the button is pressed
 bottom_button = tk.Button(bottom_frame, text='Back', fg='black', command=echo_hello)
-# 讓系統自動擺放元件（靠下方）
 bottom_button.pack(side=tk.BOTTOM)
 
-# 運行主程式
+# Run code
 window.mainloop()
